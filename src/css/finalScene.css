@@ -1,0 +1,294 @@
+.final-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.coat-of-arm-div,
+.final-info-div {
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.coat-of-arm-div {
+    position: absolute;
+    top: 70%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    z-index: 2;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+
+    p {
+        position: absolute;
+        bottom: 32.5%;
+
+        width: min(90%, 50rem);
+        padding-inline: 0.5rem;
+
+        font-size: clamp(0.75rem, 1.4vw, 1.125rem);
+        overflow-wrap: anywhere;
+        text-align: center;
+    }
+}
+
+.coat-of-arm-div.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.coat-of-arm-div img {
+    display: block;
+    width: var(--coat-of-arm-size);
+    max-width: none;
+    height: auto;
+    object-fit: contain;
+    margin-inline: auto;
+}
+
+.coat-of-arm-div.is-visible img {
+    animation: coatOfArmsShrink 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    filter: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.24));
+}
+
+.final-scene {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    background: #031810;
+    isolation: isolate;
+}
+
+.national-identity-section {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 43%,
+            rgba(0, 135, 81, 0.25) 0%,
+            rgba(0, 135, 81, 0.08) 35%,
+            transparent 68%
+        ),
+        linear-gradient(
+            145deg,
+            #031810 0%,
+            #06251a 50%,
+            #010b07 100%
+        );
+}
+
+.national-identity-section.not-visible{
+    animation: finalSceneNotVisible 1.6s ease-in-out forwards;
+}
+
+.final-info-div {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(6px, (100vw - 480px), 16px);
+    background: linear-gradient(
+            to right, 
+            #008751 0%, 
+            #008751 33.33%, 
+            #ffffff 33.33%, 
+            #ffffff 66.66%,
+            #008751 66.66%, 
+            #008751 100%
+            );;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+
+    h1{
+        background: linear-gradient(
+            to right, 
+            #008751 0%, 
+            #008751 33.33%, 
+            #b2aeae 33.33%, 
+            #b2aeae 66.66%, 
+            #008751 66.66%, 
+            #008751 100%
+            );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0;
+        padding: clamp(0px, (100vw - 480px), 15px);
+        font-size: clamp(1.32rem, 5vw, 60px);
+        font-weight: 900;
+    }
+
+    p{
+        font-size: clamp(10.8px, 1.5vw, 18px)
+    }
+
+
+}
+
+.final-info-div.is-visible {
+    visibility: visible;
+    animation: finalInfoDivVisible 1.6s ease-in-out forwards;
+}
+
+
+.nigeria-map-bg {
+    position: absolute;
+    z-index: 0;
+    top: 65%;
+    left: 55%;
+
+    width: min(86vw, 760px);
+    max-height: 78%;
+
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+
+    opacity: 0;
+
+    filter:
+        brightness(0)
+        saturate(100%)
+        invert(36%)
+        sepia(75%)
+        saturate(781%)
+        hue-rotate(104deg)
+        brightness(94%)
+        contrast(91%);
+
+    animation:
+        nigeriaMapReveal 1.8s ease-out forwards,
+        nigeriaMapFloat 8s ease-in-out 1.8s infinite;
+}
+
+@keyframes nigeriaMapReveal {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -47%) scale(0.97);
+    }
+
+    to {
+        opacity: 0.18;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes nigeriaMapFloat {
+    0%, 100% {
+        transform: translate(-50%, -50%);
+    }
+
+    50% {
+        transform: translate(-50%, -52%);
+    }
+}
+
+
+@keyframes finalInfoDivVisible {
+    from{ opacity: 0; }
+    to{ opacity: 1; }
+}
+
+@keyframes finalSceneNotVisible {
+    from{ opacity: 1; }
+    to{ opacity: 0 }
+}
+
+@keyframes coatOfArmsShrink {
+    from {
+        width: 100vw;
+    }
+
+    to {
+        width: var(--coat-of-arm-size);
+    }
+}
+
+:root {
+    --coat-of-arm-size: clamp(
+        9.5rem,
+        min(30vw, 31vh),
+        24rem
+    );
+}
+
+@media (min-width: 768px) and (max-height: 650px) {
+    :root {
+        --coat-of-arm-size: clamp(7rem, 24vh, 12rem);
+    }
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+    :root {
+        --coat-of-arm-size: clamp(
+            9.5rem,
+            min(42vw, 31vh),
+            22rem
+        );
+    }
+}
+
+@media (max-width: 375px) {
+    :root {
+        --coat-of-arm-size: clamp(
+            8.5rem,
+            min(48vw, 29vh),
+            12rem
+        );
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    :root {
+        --coat-of-arm-size: clamp(16rem, 36vw, 22rem);
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    :root {
+        --coat-of-arm-size: clamp(14rem, 42vw, 18rem);
+    }
+}
+
+@media (min-width: 376px) and (max-width: 480px) {
+    :root {
+        --coat-of-arm-size: clamp(11.5rem, 46vw, 14.5rem);
+    }
+}
+
+@media (min-width: 320px) and (max-width: 375px) {
+    :root {
+        --coat-of-arm-size: clamp(9.5rem, 48vw, 12rem);
+    }
+}
+
+@media (max-width: 767px) {
+    .coat-of-arm-div {
+        top: 60%;
+        transform: translateY(-50%);
+    }
+
+    .nigeria-map-bg {
+        top: 50%;
+    }
+}

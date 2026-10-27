@@ -1,0 +1,1 @@
+export const env_config = import.meta.env.BASE_URL

@@ -1,0 +1,56 @@
+.audio-toggle-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: rgba(7, 253, 89, 0.173);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0 20px;
+  cursor: pointer;
+  font-size: clamp(0.5rem, calc(100vw - 480px), 1rem);
+  font-weight: 900;
+  width: clamp(70px, calc(100vw - 480px), 110px);
+  height: clamp(30px, calc(100vw - 480px), 50px);
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+
+    top: 0;
+    left: -75%;
+
+    width: 45%;
+    height: 100%;
+
+    background: linear-gradient(
+        110deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.08) 25%,
+        rgba(255, 255, 255, 0.65) 50%,
+        rgba(255, 255, 255, 0.08) 75%,
+        transparent 100%
+    );
+
+    transform: skewX(-20deg);
+    pointer-events: none;
+
+    animation: audio-button-shimmer 2.8s ease-in-out infinite;
+}
+
+}
+
+
+@keyframes audio-button-shimmer {
+    0%, 15% {
+        left: -75%;
+    }
+
+    65%, 100% {
+        left: 130%;
+    }
+}
